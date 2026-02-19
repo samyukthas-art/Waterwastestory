@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Water Escape Rooms (Class 7) – Cartoon MCQ</title>
+  <style>
+    :root{
+      --bg1:#7fd7ff;
+      --bg2:#b7ffdc;
+      --card:#ffffff;
+      --ink:#12324a;
+      --accent:#ff7aa2;
+      --accent2:#5b8cff;
+      --good:#1bbf7a;
+      --bad:#ff4d5e;
+      --shadow:0 14px 30px rgba(0,0,0,.18);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--ink);
+      background: radial-gradient(circle at 15% 10%, var(--bg1), transparent 50%),
+                  radial-gradient(circle at 85% 20%, var(--bg2), transparent 55%),
+                  linear-gradient(180deg, #e9fbff, #f4fffb);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    .app{
+      width:min(980px, 100%);
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:16px;
+    }
+    @media (max-width: 900px){
+      .app{grid-template-columns:1fr}
+    }
+    .panel{
+      background:rgba(255,255,255,.78);
+      border:2px solid rgba(18,50,74,.10);
+      border-radius:20px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .header{
+      padding:16px 16px 10px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .title h1{
+      margin:0;
+      font-size:22px;
+      letter-spacing:.2px;
+    }
+    .title p{
+      margin:6px 0 0;
+      opacity:.85;
+      font-size:13px;
+      line-height:1.25;
+    }
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      justify-content:flex-end;
+    }
+    .chip{
+      background: #fff;
+      border:2px solid rgba(18,50,74,.10);
+      border-radius:999px;
+      padding:6px 10px;
+      font-weight:800;
+      font-size:12px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      box-shadow: 0 8px 16px rgba(0,0,0,.08);
+      white-space:nowrap;
+    }
+    .chip .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--accent2);
+      display:inline-block;
+    }
+    .chip.bad .dot{background: var(--bad)}
+    .chip.good .dot{background: var(--good)}
+    .chip.pink .dot{background: var(--accent)}
+    .scene{
+      background: linear-gradient(180deg, #eaffff, #ffffff);
+      padding:10px 14px 14px;
+    }
+    .svgWrap{
+      background:#fff;
+      border-radius:18px;
+      border:2px solid rgba(18,50,74,.10);
+      box-shadow: 0 10px 20px rgba(0,0,0,.10);
+      overflow:hidden;
+    }
+    .svgCaption{
+      font-weight:900;
+      text-align:center;
+      padding:10px 12px 0;
+      font-size:14px;
+      color: rgba(18,50,74,.9);
+    }
+    .main{
+      padding:14px 16px 18px;
+    }
+    .roomBadge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border-radius:999px;
+      padding:8px 12px;
+      font-weight:900;
+      background: #fff;
+      border:2px solid rgba(18,50,74,.10);
+      box-shadow: 0 10px 18px rgba(0,0,0,.08);
+      margin-bottom:10px;
+    }
+    .roomBadge .key{
+      width:18px; height:18px; border-radius:6px;
+      background: linear-gradient(135deg, var(--accent), #ffd36e);
+      display:inline-block;
+    }
+    .question{
+      font-size:17px;
+      font-weight:900;
+      margin:10px 0 12px;
+      line-height:1.35;
+    }
+    .options{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 560px){
+      .options{grid-template-columns:1fr}
+    }
+    button.opt{
+      border:none;
+      cursor:pointer;
+      border-radius:16px;
+      padding:12px 12px;
+      text-align:left;
+      font-weight:900;
+      color: var(--ink);
+      background: #ffffff;
+      border:2px solid rgba(18,50,74,.10);
+      box-shadow: 0 10px 16px rgba(0,0,0,.08);
+      transition: transform .06s ease, filter .15s ease;
+      min-height:56px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    button.opt:hover{ filter: brightness(1.02); }
+    button.opt:active{ transform: scale(.99); }
+    .bubble{
+      width:34px; height:34px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:1000;
+      background: linear-gradient(135deg, #c6f7ff, #e9f4ff);
+      border:2px solid rgba(18,50,74,.08);
+      flex: 0 0 auto;
+    }
+    .status{
+      margin-top:12px;
+      font-weight:1000;
+      min-height:24px;
+    }
+    .hint{
+      margin-top:6px;
+      font-size:13px;
+      opacity:.9;
+      min-height:18px;
+    }
+    .controls{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn{
+      border:none;
+      cursor:pointer;
+      border-radius:14px;
+      padding:10px 12px;
+      font-weight:1000;
+      background: linear-gradient(135deg, var(--accent2), #7bdaff);
+      color:#07233b;
+      box-shadow: 0 10px 16px rgba(0,0,0,.10);
+    }
+    .btn.secondary{
+      background: linear-gradient(135deg, #ffd36e, #ff8bb0);
+    }
+    .btn.ghost{
+      background: #ffffff;
+      border:2px solid rgba(18,50,74,.10);
+      box-shadow: 0 10px 16px rgba(0,0,0,.08);
+    }
+    .side{
+      padding:14px 16px 18px;
+    }
+    .card{
+      background:#fff;
+      border:2px solid rgba(18,50,74,.10);
+      border-radius:18px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.10);
+      padding:14px;
+      margin-bottom:12px;
+    }
+    .card h3{
+      margin:0 0 8px;
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .meter{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      font-weight:900;
+      font-size:13px;
+    }
+    .bar{
+      height:12px;
+      flex:1;
+      border-radius:999px;
+      background: rgba(18,50,74,.08);
+      overflow:hidden;
+      border:1px solid rgba(18,50,74,.10);
+    }
+    .fill{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, var(--good), #6cf2c3);
+      transition: width .25s ease;
+    }
+    .small{
+      font-size:12px;
+      opacity:.85;
+      line-height:1.35;
+    }
+    .win{
+      text-align:center;
+      padding:24px 16px;
+    }
+    .win h2{
+      margin:0 0 8px;
+      font-size:22px;
+    }
+    .win p{
+      margin:6px 0;
+      font-weight:800;
+      opacity:.9;
+    }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 8px;
+      background: rgba(18,50,74,.08);
+      border: 1px solid rgba(18,50,74,.10);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- LEFT: Main gameplay -->
+    <div class="panel">
+      <div class="header">
+        <div class="title">
+          <h1>🚪 Water Escape Rooms (Class 7)</h1>
+          <p>Cartoon MCQ Escape Game • Chapter: <b>Water: A Precious Resource</b> • Answer fast to unlock doors and reach the water 💧</p>
+        </div>
+        <div class="chips">
+          <div class="chip pink" title="Room">
+            <span class="dot"></span><span id="roomChip">Room 1</span>
+          </div>
+          <div class="chip" title="Locks solved">
+            <span class="dot"></span><span id="locksChip">0/3 locks</span>
+          </div>
+          <div class="chip bad" title="Timer">
+            <span class="dot"></span><span id="timerChip">⏳ 60s</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="svgWrap" id="sceneArt"></div>
+        <div class="svgCaption" id="sceneCaption">Room scene</div>
+      </div>
+
+      <div class="main" id="mainArea">
+        <div class="roomBadge"><span class="key"></span><span id="roomBadgeText">Room 1: The Locked Tap</span></div>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="status" id="status"></div>
+        <div class="hint" id="hint"></div>
+
+        <div class="controls">
+          <button class="btn ghost" id="soundBtn" onclick="toggleSound()">🔊 Sound: ON</button>
+          <button class="btn ghost" onclick="restartRoom()">🔁 Restart Room</button>
+          <button class="btn secondary" onclick="restartGame()">🧩 Restart Game</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Info / progress -->
+    <div class="panel">
+      <div class="side">
+        <div class="card">
+          <h3>🎯 Mission</h3>
+          <div class="small">
+            Clear all rooms. Each room has <b>3 locks</b> (MCQs).<br/>
+            If timer hits <b>0</b>, you stay trapped and must restart the room.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📊 Progress</h3>
+          <div class="meter">
+            <span>Rooms</span>
+            <div class="bar"><div class="fill" id="roomFill"></div></div>
+            <span id="roomProgressText">1/3</span>
+          </div>
+          <div style="height:10px"></div>
+          <div class="meter">
+            <span>Score</span>
+            <div class="bar"><div class="fill" id="scoreFill"></div></div>
+            <span id="scoreText">0</span>
+          </div>
+          <div class="small" style="margin-top:10px">
+            ✅ Correct: <b>+10</b> points<br/>
+            ❌ Wrong: <b>-2</b> points<br/>
+            ⏱ Fast finish bonus: up to <b>+10</b> points per room
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🌍 Hosting (Quick)</h3>
+          <div class="small">
+            <b>GitHub Pages:</b> Put this file as <span class="kbd">index.html</span> in a repo → Settings → Pages → Deploy.<br/><br/>
+            <b>Netlify:</b> Drag & drop the folder with <span class="kbd">index.html</span> into Netlify “Deploy”.<br/><br/>
+            If you want, tell me “GitHub” or “Netlify” and I’ll give the exact steps for your phone/PC.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<script>
+/* ------------------------------
+   Cartoon Escape Rooms (MCQ)
+   - 3 rooms
+   - each room has 3 locks
+   - per-room countdown timer
+   - sound effects via WebAudio
+--------------------------------*/
+
+const ROOMS = [
+  {
+    id: 1,
+    title: "Room 1: The Locked Tap",
+    caption: "A dry tap. Unlock the locks to make water flow!",
+    seconds: 60,
+    svg: sceneSVG(1),
+    locks: [
+      {
+        q: "Why is water called a precious resource?",
+        options: [
+          "Because it is unlimited on Earth",
+          "Because it is limited and essential for life",
+          "Because it is only found in oceans",
+          "Because it cannot be stored"
+        ],
+        correct: 1,
+        hint: "Hint: Usable freshwater is limited."
+      },
+      {
+        q: "Which process changes water vapour into tiny droplets to form clouds?",
+        options: ["Evaporation", "Condensation", "Melting", "Freezing"],
+        correct: 1,
+        hint: "Hint: Vapour → droplets."
+      },
+      {
+        q: "Roughly what percentage of Earth’s water is fresh water?",
+        options: ["About 97%", "About 50%", "About 3%", "About 25%"],
+        correct: 2,
+        hint: "Hint: It’s a very small fraction."
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "Room 2: The Underground Tunnel",
+    caption: "Find the hidden water below the ground!",
+    seconds: 70,
+    svg: sceneSVG(2),
+    locks: [
+      {
+        q: "What is groundwater?",
+        options: [
+          "Water inside clouds",
+          "Water stored under the ground in spaces between rocks and soil",
+          "Water only in rivers",
+          "Water made by plants"
+        ],
+        correct: 1,
+        hint: "Hint: It is stored below the surface."
+      },
+      {
+        q: "Which activity mainly helps recharge groundwater?",
+        options: ["Deforestation", "Rainwater seepage into soil", "Burning plastic", "More traffic"],
+        correct: 1,
+        hint: "Hint: Water goes into soil and rocks."
+      },
+      {
+        q: "Overuse of groundwater can cause:",
+        options: ["More rainfall", "Water table to go down", "Ocean level to go down", "More clouds"],
+        correct: 1,
+        hint: "Hint: Less water remains underground."
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "Room 3: The Save-Water Lab",
+    caption: "Final room! Choose smart conservation methods!",
+    seconds: 75,
+    svg: sceneSVG(3),
+    locks: [
+      {
+        q: "Which is a correct method to conserve water?",
+        options: [
+          "Leave taps running while brushing",
+          "Fix leaking taps and avoid wastage",
+          "Wash vehicles daily with hose pipe",
+          "Keep water tanks overflowing"
+        ],
+        correct: 1,
+        hint: "Hint: Stop leaks and reduce wastage."
+      },
+      {
+        q: "Rainwater harvesting means:",
+        options: [
+          "Collecting and storing rainwater for later use",
+          "Adding salt to rain",
+          "Stopping rain from falling",
+          "Only drinking rainwater"
+        ],
+        correct: 0,
+        hint: "Hint: Collect + store rainwater."
+      },
+      {
+        q: "Which place is most suitable for storing harvested rainwater?",
+        options: ["Open road", "Underground tank / recharge pit", "TV", "Shoes"],
+        correct: 1,
+        hint: "Hint: Safe storage or recharge structure."
+      }
+    ]
+  }
+];
+
+let soundOn = true;
+let audioCtx = null;
+
+let roomIndex = 0;         // 0..2
+let lockIndex = 0;         // 0..2 per room
+let timer = null;
+let timeLeft = 0;
+let score = 0;
+let roomStartSeconds = 0;
+
+const sceneArt = document.getElementById("sceneArt");
+const sceneCaption = document.getElementById("sceneCaption");
+const roomBadgeText = document.getElementById("roomBadgeText");
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const statusEl = document.getElementById("status");
+const hintEl = document.getElementById("hint");
+
+const roomChip = document.getElementById("roomChip");
+const locksChip = document.getElementById("locksChip");
+const timerChip = document.getElementById("timerChip");
+
+const roomFill = document.getElementById("roomFill");
+const roomProgressText = document.getElementById("roomProgressText");
+const scoreFill = document.getElementById("scoreFill");
+const scoreText = document.getElementById("scoreText");
+const soundBtn = document.getElementById("soundBtn");
+
+function ensureAudio(){
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+}
+function beep(type){
+  if(!soundOn) return;
+  ensureAudio();
+  const ctx = audioCtx;
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.connect(g); g.connect(ctx.destination);
+
+  const now = ctx.currentTime;
+  let freq = 440, dur = 0.12;
+  if(type === "click"){ freq = 520; dur = 0.06; }
+  if(type === "good"){ freq = 740; dur = 0.12; }
+  if(type === "bad"){ freq = 180; dur = 0.16; }
+  if(type === "win"){ freq = 880; dur = 0.20; }
+
+  o.type = (type === "bad") ? "sawtooth" : "triangle";
+  o.frequency.setValueAtTime(freq, now);
+  g.gain.setValueAtTime(0.0001, now);
+  g.gain.exponentialRampToValueAtTime(0.25, now + 0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+
+  o.start(now);
+  o.stop(now + dur);
+}
+
+function toggleSound(){
+  soundOn = !soundOn;
+  soundBtn.textContent = soundOn ? "🔊 Sound: ON" : "🔇 Sound: OFF";
+  beep("click");
+}
+
+function startRoom(){
+  const room = ROOMS[roomIndex];
+  lockIndex = 0;
+  statusEl.textContent = "";
+  hintEl.textContent = "";
+  sceneArt.innerHTML = room.svg;
+  sceneCaption.textContent = room.caption;
+
+  roomBadgeText.textContent = room.title;
+  roomChip.textContent = `Room ${room.id}`;
+  locksChip.textContent = `0/${room.locks.length} locks`;
+
+  timeLeft = room.seconds;
+  roomStartSeconds = room.seconds;
+  updateTimerUI();
+  renderLock();
+  startTimer();
+  updateProgressUI();
+}
+
+function startTimer(){
+  if(timer) clearInterval(timer);
+  timer = setInterval(() => {
+    timeLeft--;
+    updateTimerUI();
+    if(timeLeft <= 0){
+      clearInterval(timer);
+      timer = null;
+      timeLeft = 0;
+      updateTimerUI();
+      trapTimeout();
+    }
+  }, 1000);
+}
+
+function updateTimerUI(){
+  timerChip.textContent = `⏳ ${timeLeft}s`;
+  // chip color: bad when low
+  const timerChipEl = timerChip.parentElement;
+  timerChipEl.classList.remove("bad","good");
+  if(timeLeft <= 10) timerChipEl.classList.add("bad");
+  else timerChipEl.classList.add("good");
+}
+
+function renderLock(){
+  const room = ROOMS[roomIndex];
+  const lock = room.locks[lockIndex];
+
+  questionEl.textContent = `${lockIndex+1}) ${lock.q}`;
+  optionsEl.innerHTML = "";
+  statusEl.textContent = "";
+  hintEl.textContent = "";
+
+  lock.options.forEach((opt, idx) => {
+    const btn = document.createElement("button");
+    btn.className = "opt";
+    btn.innerHTML = `<span class="bubble">${String.fromCharCode(65+idx)}</span><span>${opt}</span>`;
+    btn.onclick = () => choose(idx);
+    optionsEl.appendChild(btn);
+  });
+
+  locksChip.textContent = `${lockIndex}/${room.locks.length} locks`;
+}
+
+function lockButtons(disabled){
+  [...optionsEl.querySelectorAll("button.opt")].forEach(b => b.disabled = disabled);
+  if(disabled){
+    [...optionsEl.querySelectorAll("button.opt")].forEach(b => b.style.opacity = "0.86");
+  }
+}
+
+function choose(idx){
+  beep("click");
+  const room = ROOMS[roomIndex];
+  const lock = room.locks[lockIndex];
+
+  if(idx === lock.correct){
+    beep("good");
+    score += 10;
+    statusEl.style.color = "var(--good)";
+    statusEl.textContent = "✅ Correct! Lock opened.";
+    hintEl.textContent = lock.hint;
+    lockButtons(true);
+
+    setTimeout(() => {
+      lockIndex++;
+      locksChip.textContent = `${lockIndex}/${room.locks.length} locks`;
+
+      if(lockIndex < room.locks.length){
+        renderLock();
+      } else {
+        finishRoom();
+      }
+      updateProgressUI();
+    }, 900);
+  } else {
+    beep("bad");
+    score = Math.max(0, score - 2);
+    statusEl.style.color = "var(--bad)";
+    statusEl.textContent = "❌ Wrong option! Try again.";
+    hintEl.textContent = "Hint: Think about the NCERT idea carefully.";
+    updateProgressUI();
+  }
+}
+
+function finishRoom(){
+  // bonus based on remaining time
+  const bonus = Math.max(0, Math.min(10, Math.floor(timeLeft / 6)));
+  score += bonus;
+
+  if(timer) clearInterval(timer);
+  timer = null;
+
+  const room = ROOMS[roomIndex];
+  statusEl.style.color = "var(--good)";
+  statusEl.textContent = `🎉 Room cleared! Bonus +${bonus}. Door opened!`;
+  hintEl.textContent = "Next room unlocked!";
+
+  lockButtons(true);
+
+  setTimeout(() => {
+    roomIndex++;
+    if(roomIndex < ROOMS.length){
+      startRoom();
+    } else {
+      winGame();
+    }
+  }, 1200);
+}
+
+function trapTimeout(){
+  beep("bad");
+  statusEl.style.color = "var(--bad)";
+  statusEl.textContent = "⛔ Time’s up! You are trapped in this room.";
+  hintEl.textContent = "Restart the room and try again!";
+  lockButtons(true);
+}
+
+function restartRoom(){
+  beep("click");
+  startRoom();
+}
+
+function restartGame(){
+  beep("click");
+  roomIndex = 0;
+  score = 0;
+  startRoom();
+}
+
+function winGame(){
+  beep("win");
+  const main = document.getElementById("mainArea");
+  main.innerHTML = `
+    <div class="win">
+      <h2>💧 You Escaped ALL Rooms! 💧</h2>
+      <p>Water found! Great science skills! 🚀</p>
+      <p><b>Final Score:</b> ${score}</p>
+      <div style="margin-top:14px">
+        <button class="btn" onclick="location.reload()">Play Again</button>
+      </div>
+      <p class="small" style="margin-top:14px">
+        Want more? I can add <b>10+ questions</b> and <b>more rooms</b> from the same chapter.
+      </p>
+    </div>
+  `;
+
+  // Update chips
+  roomChip.textContent = `Completed`;
+  locksChip.textContent = `All locks`;
+  timerChip.textContent = `⏳ Done`;
+  updateProgressUI(true);
+}
+
+function updateProgressUI(forceComplete=false){
+  scoreText.textContent = score;
+
+  const roomCount = ROOMS.length;
+  const roomsDone = forceComplete ? roomCount : (roomIndex + 1);
+  const roomPct = forceComplete ? 100 : Math.round((roomIndex / roomCount) * 100);
